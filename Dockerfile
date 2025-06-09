@@ -7,7 +7,7 @@ WORKDIR /app
 COPY index.php /app/
 
 # Expose port
-EXPOSE 80
+EXPOSE 8080
 
 # Run the PHP built-in web server
-CMD ["php", "-S", "0.0.0.0:80"]
+CMD ["php", "-S", "0.0.0.0:8080"]
