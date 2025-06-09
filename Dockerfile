@@ -1,17 +1,13 @@
-FROM php:8.2-fpm
+FROM php:8.2-cli
 
-# Install Nginx
-RUN apt-get update && apt-get install -y nginx \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Set working directory
+WORKDIR /app
 
-# Configure Nginx
-COPY default.conf /etc/nginx/conf.d/default.conf
-
-# Copy PHP file
-COPY index.php /var/www/html/index.php
+# Copy PHP file into container
+COPY index.php /app/
 
 # Expose port
 EXPOSE 80
 
-# Start both Nginx and PHP-FPM
-CMD service php8.2-fpm start && nginx -g 'daemon off;'
+# Run the PHP built-in web server
+CMD ["php", "-S", "0.0.0.0:80"]
